@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+
+    <style>
+      body {
+        background-color: rgb(75, 75, 75);
+        font-family: "JetBrains Mono", monospace;
+      }
+      .card {
+        --circle-radius: 60px;
+
+        margin-top: 50px;
+        margin-left: 50px;
+        width: 400px;
+        min-height: 460px;
+        background-color: #fff;
+        border-radius: var(--circle-radius);
+        overflow: hidden;
+      }
+      .cardImg {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        background: url(./kyotoTexi.jpg) no-repeat center center / cover;
+        filter: blur(16px);
+        transition: filter 0.4s;
+      }
+      .card:hover .cardImg {
+        filter: blur(0);
+        transition-delay: 0s;
+      }
+      .card:hover .content {
+        grid-template-rows: min-content 1fr;
+        transition-delay: 0s;
+      }
+      .cardImg::before,
+      .cardImg::after {
+        content: "";
+        position: absolute;
+      }
+      .cardImg::before {
+        bottom: calc(var(--circle-radius) * -1);
+        width: 100%;
+        height: calc(var(--circle-radius) * 2);
+        border-radius: var(--circle-radius) var(--circle-radius) 0 0;
+        background-color: #fff;
+      }
+      .cardImg::after {
+        right: 0;
+        bottom: var(--circle-radius);
+        width: calc(var(--circle-radius) * 2);
+        height: calc(var(--circle-radius) * 2);
+        border-radius: 50%;
+        background: #fff;
+        background: transparent;
+        box-shadow: var(--circle-radius) var(--circle-radius) 0 0 #fff;
+      }
+
+      .content {
+        position: relative;
+        bottom: calc(var(--circle-radius) / 3);
+        margin-inline: 40px;
+        display: grid;
+        grid-template-rows: min-content 0fr;
+        transition: grid-template-rows 0.4s;
+      }
+      h2 {
+        margin: 0;
+        letter-spacing: 0.1rem;
+        font-weight: 800;
+        color: rgb(171, 74, 0);
+      }
+      .subHeading {
+        font-size: 14px;
+        color: rgb(0, 65, 95);
+        font-weight: 600;
+        letter-spacing: 0.1rem;
+      }
+      .text {
+        overflow: hidden;
+        margin: 0;
+        opacity: 0;
+        transition: margin 0s 0.4s, opacity 0.4s;
+        word-break: break-all;
+      }
+      .card:hover .text {
+        margin-top: 16px;
+        opacity: 1;
+        transition-delay: 0.4s, 0.4s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="cardImg"></div>
+      <div class="content">
+        <div class="contentHeader">
+          <h2>KYOTO</h2>
+          <p class="subHeading">Japan</p>
+        </div>
+        <p class="text">
+          This photograph captures a typical street scene in Kyoto, Japan. In
+          the foreground, a distinctive orange taxi, characteristic of the city,
+          is prominently featured. The image showcases a mix of vehicle types,
+          including modern cars and taxis, parked along a bustling urban
+          street.The image conveys the vibrant atmosphere of Kyoto's streets,
+          highlighting the unique charm of its public transportation against the
+          backdrop of the city's diverse architectural landscape.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
