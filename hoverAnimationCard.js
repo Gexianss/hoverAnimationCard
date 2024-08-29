@@ -77,23 +77,68 @@
             opacity: 1;
             transition-delay: 0.4s, 0.4s;
         }
-    `
+    `;
+
     class CustomCard {
         constructor(container, options) {
-            this.container = typeof container === 'string' ? document.querySelector(container) : container
+            this.container = typeof container === 'string' ? document.querySelector(container) : container;
             this.options = Object.assign({
                 image: '',
                 title: 'Title',
-                subTitle: 'SubTitle',
-                description: 'Description goes her.',
+                subtitle: 'Subtitle',
+                description: 'Description goes here.',
                 borderRadius: 60,
                 titleColor: 'rgb(171, 74, 0)',
-                subTitleColor: 'rgb(0, 65, 95)',
-                backgroundColor: 'rgb(255, 255, 255)'
-            }, options)
+                subtitleColor: 'rgb(0, 65, 95)'
+            }, options);
 
-            this.init()
-            
+            this.init();
+            this.render();
+        }
+
+        init() {
+            if (!document.getElementById('custom-card-styles')) {
+                const styleElement = document.createElement('style');
+                styleElement.id = 'custom-card-styles';
+                styleElement.textContent = style;
+                document.head.appendChild(styleElement);
+            }
+        }
+
+        render() {
+            const card = document.createElement('div');
+            card.className = 'custom-card';
+            card.style.borderRadius = `${this.options.borderRadius}px`;
+
+            card.innerHTML = `
+                <div class="custom-card-img"></div>
+                <div class="custom-card-content">
+                    <div class="custom-card-header">
+                        <h2 class="custom-card-title">${this.options.title}</h2>
+                        <p class="custom-card-subtitle">${this.options.subtitle}</p>
+                    </div>
+                    <p class="custom-card-text">${this.options.description}</p>
+                </div>
+            `;
+
+            const cardImg = card.querySelector('.custom-card-img');
+            cardImg.style.backgroundImage = `url(${this.options.image})`;
+            cardImg.style.borderRadius = `${this.options.borderRadius}px ${this.options.borderRadius}px 0 0`;
+
+            cardImg.style.setProperty('--circle-radius', `${this.options.borderRadius}px`);
+            cardImg.style.setProperty('--negative-circle-radius', `${-this.options.borderRadius}px`);
+            cardImg.style.setProperty('--double-circle-radius', `${this.options.borderRadius * 2}px`);
+
+            const title = card.querySelector('.custom-card-title');
+            title.style.color = this.options.titleColor;
+
+            const subtitle = card.querySelector('.custom-card-subtitle');
+            subtitle.style.color = this.options.subtitleColor;
+
+            this.container.appendChild(card);
         }
     }
-})
+
+    global.CustomCard = CustomCard;
+
+})(typeof window !== 'undefined' ? window : this);
