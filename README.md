@@ -68,11 +68,11 @@ CustomCard 接受以下配置選項：
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CustomCard Demo</title>
-    <script src="CustomCard.js"></script>
 </head>
 <body>
     <div id="cardContainer"></div>
 
+    <script src="CustomCard.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             new CustomCard('#cardContainer', {
